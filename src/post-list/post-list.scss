@@ -1,0 +1,29 @@
+.postlist {
+    width: 100%;
+    max-width: 1200px;
+    margin: auto;
+}
+
+.postitem a {
+    text-decoration: none;
+}
+
+.error {
+    font-size: 0.8rem;
+    font-style: italic;
+    color: #e57373;
+    text-align: center;
+}
+
+.details {
+    display: flex;
+    align-items: center;
+
+    i {
+        margin-right: 4px;
+
+        &:not(:first-child) {
+            margin-left: 16px;
+        }
+    }
+}
