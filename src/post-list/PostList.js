@@ -123,7 +123,7 @@ class PostList extends Component {
 
         return (
             <div className={ css.postlist }>
-                <SearchBar onFilterChange={ this.onFilterChange } />
+                <SearchBar init={ this.state.filter } onFilterChange={ this.onFilterChange } />
                 <List selectable ripple>
                     <ListDivider />
                     { this.state.items.map((item) => (
