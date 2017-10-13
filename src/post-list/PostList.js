@@ -18,7 +18,7 @@ class PostList extends Component {
 
         this.onFilterChange = this.onFilterChange.bind(this)
 
-        this.fetchNewQuery()
+        setTimeout(() => this.fetchNewQuery())
     }
 
     checkFetchStatus(response) {
