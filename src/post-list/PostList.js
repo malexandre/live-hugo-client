@@ -31,7 +31,7 @@ class PostList extends Component {
         throw error
     }
 
-    async fetchNewQuery() {
+    async fetchNewQuery(reset = true) {
         this.setState({ loading: true, error: undefined })
 
         const params = {
@@ -44,7 +44,7 @@ class PostList extends Component {
 
         let res, json
         try {
-            res = await fetch('/api/list', params)
+            res = await fetch(`/api/list?filter=${this.state.filter}`, params)
             this.checkFetchStatus(res)
         }
         catch (err) {
@@ -62,9 +62,10 @@ class PostList extends Component {
         }
 
         this.setState({
-            items: this.state.items.concat(json.items),
+            items: reset ? json.items : this.state.items.concat(json.items),
             loading: false,
-            nextPage: json.nextPage
+            nextPage: json.nextPage,
+            error: undefined
         })
     }
 
@@ -88,14 +89,12 @@ class PostList extends Component {
         return <div className={ css.details }>{ details }</div>
     }
 
-    onFilterChange(filter) {
-        if (filter.trim() !== this.state.filter.trim()) {
-            if (filter.trim()) {
-                this.setState({ filter })
-            }
-            else {
-                this.setState({ filter: '' })
-            }
+    onFilterChange(filter = '') {
+        if (filter.trim() !== this.state.filter) {
+            this.setState({
+                filter: filter.trim()
+            })
+            this.fetchNewQuery()
         }
     }
 
