@@ -77,13 +77,27 @@ class PostList extends Component {
         const details = []
 
         if (item.date) {
-            details.push(<i className="material-icons">event</i>)
-            details.push(formatDateLib('{year}-{month}-{day} {hours}:{minutes}', new Date(item.date)))
+            details.push(
+                <i className="material-icons" key="event-icon">
+                    event
+                </i>
+            )
+            details.push(
+                <span key="event-data">
+                    { formatDateLib('{year}-{month}-{day} {hours}:{minutes}', new Date(item.date)) }
+                </span>
+            )
         }
 
         if (item.categories && item.categories.length) {
-            details.push(<i className="material-icons">label</i>)
-            details.push(item.categories.reduce((ret, cat) => (ret ? `${ret}, ${cat}` : cat)))
+            details.push(
+                <i className="material-icons" key="label-icon">
+                    label
+                </i>
+            )
+            details.push(
+                <span key="label-data">{ item.categories.reduce((ret, cat) => (ret ? `${ret}, ${cat}` : cat)) }</span>
+            )
         }
 
         return <div className={ css.details }>{ details }</div>
